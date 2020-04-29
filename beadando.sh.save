@@ -1,0 +1,19 @@
+#!/bin/bash
+clear
+echo -e "\n"
+echo -e "\t~~~<<<***MENETREND***>>>~~~"
+case $1 in 
+	busz)
+		echo -e "\t------------Busz-----------";;
+	vonat)
+		echo -e "\t-----------Vonat-----------";;
+esac
+echo -e "\n"
+now=$(date +"%T")
+echo -e '\nPontos ido:  ' $now '\nHonnan: ' $2 '\nHová: '$3
+echo "Mikor: "
+	if[$2 -eq `cat menetrend.txt | grep -2`
+]
+	grep $2 <menetrend.txt> | awk '{print $1,$3}'
+	fi
+
