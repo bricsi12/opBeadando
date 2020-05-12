@@ -1,24 +1,62 @@
 #!/bin/bash
-clear
-echo -e "\n"
-echo -e "\t~~~<<<***MENETREND***>>>~~~"
-case $1 in 
-	busz)
-		echo -e "\t------------Busz-----------";;
-	vonat)
-		echo -e "\t-----------Vonat-----------";;
-esac
-echo -e "\n"
-now=$(date +"%T")
-echo -e '\nPontos ido:  ' $now '\nHonnan: ' $2 '\nHová: '$3 
-if [ $2 != $3 ]
-then
-mikor=cat | grep --color -i -w  $2  menetrend
-mikor2=cat | grep --color -i -w  $3  menetrend
-mikor3=$mikor $mikor2
+magenta=`tput setaf 5`
+red=`tput setaf 1`
+bcground=`tput setab 7`
+bcground2=`tput setab 1`
+reset=`tput sgr0`
 
-else
-echo "Hibás paraméterek!"
-fi
-echo $mikor3
+echo "${bcground2}Try -h for help.${reset}"
+
+while getopts 'hasmd' opt;
+do
+
+echo  "____________________________"
+echo  "                            "
+echo  "        S I M P L E         "
+echo  "    C A L C U L A T O R     "
+echo  "____________________________"
+
+case "$opt" in
+
+	h)echo "-a ==> ADDITION"
+	  echo "-s ==> SUBTRACTION"
+	  echo "-m ==> MULTIPLICATION"
+	  echo "-d ==> DIVISION"
+	;;
+	a)echo "${red}~~ADDITION~~${reset}"
+	  echo  1st number:
+	  read num1
+	  echo 2nd number:
+	  read num2
+	  result=`expr $num1 + $num2`
+	  echo "${magenta}${bcground}$num1 + ${magenta}${bcground}$num2 = ${bcground}$result${reset}"
+	;;
+	s)echo "${red}~~SUBTRACTION~~${reset}"
+	  echo 1st number:
+          read num1
+          echo 2nd number:
+          read num2
+          result=`expr $num1 - $num2`
+	  echo "${magenta}${bcground}$num1 - ${magenta}${bcground}$num2 = ${bcground}$result${reset}"
+	;;
+	m)echo "${red}~~MULTIPLICATION~~${reset}"
+	  echo 1st number:
+          read num1
+          echo 2nd number:
+          read num2
+          result=`expr $num1 \* $num2`
+	  echo "${magenta}${bcground}$num1 * ${magenta}${bcground}$num2 = ${bcground}$result${reset}"
+	;;
+	d)echo "${red}~~DIVISION~~${reset}"
+	  echo 1st number:
+          read num1
+          echo 2nd number:
+          read num2
+          result=`expr $num1 / $num2`
+	  echo "${magenta}${bcground}$num1 / ${magenta}${bcground}$num2 = ${bcground}$result${reset}"
+	;;
+	
+esac
+
+done
 
